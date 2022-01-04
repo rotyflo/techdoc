@@ -1,10 +1,25 @@
 /* mobile */
 #navbar {
 	width: 100%;
+	text-align: center;
+}
+
+#navbar header {
+	padding: 5px;
 }
 
 .nav-link {
 	display: block;
+	border-top: 1px solid black;
+	padding: 5px;
+}
+
+header {
+	font-weight: bold;
+}
+
+main {
+	margin: 20px;
 }
 
 /* desktop */
@@ -13,6 +28,9 @@
 		width: 200px;
 		height: 100%;
 		position: fixed;
+		top: 0;
+		left: 0;
+		border-right: 1px solid black;
 	}
 
 	.nav-link {
@@ -20,6 +38,6 @@
 	}
 
 	main {
-		margin-left: 200px;
+		margin-left: 220px;
 	}
 }
