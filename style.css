@@ -1,0 +1,25 @@
+/* mobile */
+#navbar {
+	width: 100%;
+}
+
+.nav-link {
+	display: block;
+}
+
+/* desktop */
+@media screen and (min-width: 720px) {
+	#navbar {
+		width: 200px;
+		height: 100%;
+		position: fixed;
+	}
+
+	.nav-link {
+		display: block;
+	}
+
+	main {
+		margin-left: 200px;
+	}
+}
