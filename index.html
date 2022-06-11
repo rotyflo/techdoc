@@ -1,65 +1,157 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Tech Doc</title>
-	<link rel="stylesheet" href="./style.css">
-	<link rel="stylesheet" href="https://unpkg.com/terminal.css@0.7.2/dist/terminal.min.css" />
+	<link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
 	<nav id="navbar">
-		<header>Navigation Menu</header>
-		<a href="#Section_One" class="nav-link">Section One</a>
-		<a href="#Section_Two" class="nav-link">Section Two</a>
-		<a href="#Section_Three" class="nav-link">Section Three</a>
-		<a href="#Section_Four" class="nav-link">Section Four</a>
-		<a href="#Section_Five" class="nav-link">Section Five</a>
+		<header id="nav-title">Install Homebrew</header>
+		<a href="#installation" class="nav-link">Installation</a>
+		<a href="#macos_requirements" class="nav-link">macOS Requirements</a>
+		<a href="#git_remote_mirroring" class="nav-link">Git Remote Mirroring</a>
+		<a href="#alternative_installs" class="nav-link">Alternative Installs</a>
+		<a href="#uninstallation" class="nav-link">Uninstallation</a>
 	</nav>
 
 	<main id="main-doc">
-		<section class="main-section" id="Section_One">
-			<header>Section One</header>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, est tenetur distinctio accusamus pariatur aliquid nemo doloremque voluptatem illo aperiam necessitatibus placeat, labore sequi praesentium nulla ab quae porro eaque.</p>
-			<p>Lorem ipsum dolor sit, amet <code>consectetur</code> adipisicing elit. Id alias rem quod nam consectetur minima fugit. Perferendis nesciunt vero quam eos neque, id tempora numquam eaque architecto amet, error ipsam.</p>
-			<ul>
-				<li>one</li>
-				<li>two</li>
-				<li>three</li>
-			</ul>
+		<section id="installation" class="main-section">
+			<header>Installation</header>
+			<article>
+				<p>Instructions for a supported install of Homebrew are on the <a href="https://brew.sh">homepage</a>.</p>
+				<p>This script installs Homebrew to its preferred prefix (<code>/usr/local</code> for macOS Intel,
+					<code>/opt/homebrew</code> for Apple Silicon and <code>/home/linuxbrew/.linuxbrew</code> for Linux) so that <a
+						href="https://docs.brew.sh/FAQ#why-does-homebrew-say-sudo-is-bad">you don’t need sudo</a> when you
+					<code>brew install</code>. It
+					is a careful script; it can be run
+					even if you have stuff installed in the preferred prefix already. It tells you exactly what it will do
+					before it does it too. You have to confirm everything it will do before it starts.
+				</p>
+			</article>
 		</section>
 
-		<section class="main-section" id="Section_Two">
-			<header>Section Two</header>
-			<p>Lorem ipsum dolor, sit amet <code>consectetur adipisicing elit</code>. Voluptatum quisquam cupiditate ratione quas maxime officiis dolores sint velit molestias, rerum voluptates voluptatibus provident perspiciatis ad, optio enim consequatur mollitia quae!</p>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel <code>possimus</code> debitis soluta distinctio, deserunt exercitationem nesciunt in! Mollitia omnis distinctio eaque vitae delectus quam iste sed ad consequuntur, nulla excepturi.</p>
+		<section id="macos_requirements" class="main-section">
+			<header>macOS Requirements</header>
+			<article>
+				<ul>
+					<li>A 64-bit Intel CPU or Apple Silicon CPU <sup><a href="#1">1</a></sup></li>
+					<li>macOS Catalina (10.15) (or higher) <sup><a href="#2">2</a></sup></li>
+					<li>Command Line Tools (CLT) for Xcode (from <code
+							class="language-plaintext highlighter-rouge">xcode-select --install</code> or
+						<a href="https://developer.apple.com/download/all/">https://developer.apple.com/download/all/</a>) or
+						<a href="https://itunes.apple.com/us/app/xcode/id497799835">Xcode</a> <sup><a href="#3">3</a></sup>
+					</li>
+					<li>The Bourne-again shell for installation (i.e. <code
+							class="language-plaintext highlighter-rouge">bash</code>) <sup><a href="#4">4</a></sup></li>
+				</ul>
+			</article>
 		</section>
 
-		<section class="main-section" id="Section_Three">
-			<header>Section Three</header>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quis esse <code>voluptatem sit</code>, tenetur ullam eaque obcaecati dolores veritatis deserunt enim quod vitae, cum debitis placeat harum aliquam eos magnam.</p>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis voluptas ducimus reiciendis molestiae in nobis, beatae ipsam totam dolore ea dolorum ad aliquid enim quis. Totam, perferendis? Autem, itaque. Ipsam?</p>
-			<ol>
-				<li></li>
-				<li></li>
-			</ol>
+		<section id="git_remote_mirroring" class="main-section">
+			<header>Git Remote Mirroring</header>
+			<article>
+				<p>You can use geolocalized Git mirrors to speed up Homebrew’s installation and <code>brew update</code> by
+					setting <code>HOMEBREW_BREW_GIT_REMOTE</code> and/or <code>HOMEBREW_CORE_GIT_REMOTE</code> in your shell
+					environment with
+					this script:</p>
+				<div>
+					<div>
+						<code><span >export </span><span class="nv">HOMEBREW_BREW_GIT_REMOTE</span><span class="o">=</span><span class="s2">"..."</span>  <span class="c"># put your Git mirror of Homebrew/brew here</span>
+      <span >export </span><span class="nv">HOMEBREW_CORE_GIT_REMOTE</span><span class="o">=</span><span class="s2">"..."</span>  <span class="c"># put your Git mirror of Homebrew/homebrew-core here</span>
+/bin/bash <span class="nt">-c</span> <span class="s2">"</span><span class="si">$(</span>curl <span class="nt">-fsSL</span> https://raw.githubusercontent.com/Homebrew/install/master/install.sh<span class="si">)</span><span class="s2">"</span>
+      </code>
+					</div>
+				</div>
+				<p>The default Git remote will be used if the corresponding environment variable is unset.</p>
+			</article>
 		</section>
 
-		<section class="main-section" id="Section_Four">
-			<header>Section Four</header>
-			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero velit dignissimos libero ipsum cupiditate unde natus fugiat veritatis veniam, voluptatum laudantium explicabo, dicta odio consequuntur, eos tempore quibusdam aliquid incidunt.</p>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos dolorem corporis quisquam facere pariatur explicabo, repudiandae vero, minima animi laboriosam corrupti magnam dolor. Fugiat reprehenderit assumenda nesciunt eveniet, inventore cupiditate.</p>
+		<section id="alternative_installs" class="main-section">
+			<header>Alternative Installs</header>
+			<article>
+				<p><strong>Linux or Windows 10 Subsystem for Linux</strong></p>
+				<p>Check out <a href="https://docs.brew.sh/Homebrew-on-Linux">the Homebrew on Linux installation
+						documentation</a>.</p>
+			</article>
+			<article>
+				<p><strong>Untar anywhere</strong></p>
+				<p>Just extract (or <code>git clone</code>) Homebrew wherever you
+					want. Just avoid:</p>
+				<ul>
+					<li>Directories with names that contain spaces. Homebrew itself can handle spaces, but many build scripts
+						cannot.</li>
+					<li><code>/tmp</code> subdirectories because Homebrew gets upset.
+					</li>
+					<li><code>/sw</code> and <code>/opt/local</code> because build scripts get confused when
+						Homebrew is there instead of Fink or MacPorts, respectively.</li>
+				</ul>
+				<p>However do yourself a favour and use the installer to install to the default prefix. Some things may not
+					build
+					when installed elsewhere. One of the reasons Homebrew just works relative to the competition is
+					<strong>because</strong> we recommend installing here. <em>Pick another prefix at your peril!</em>
+				</p>
+				<div>
+					<div>
+						<code><span >mkdir </span>homebrew <span class="o">&amp;&amp;</span> curl <span class="nt">-L</span> https://github.com/Homebrew/brew/tarball/master | <span >tar </span>xz <span class="nt">--strip</span> 1 <span class="nt">-C</span> homebrew
+</code>
+					</div>
+				</div>
+				<p>or</p>
+				<div>
+					<div>
+						<code>git clone https://github.com/Homebrew/brew homebrew
+</code>
+					</div>
+				</div>
+				<p>then</p>
+				<div>
+					<div>
+						<code><span >eval</span> <span class="s2">"</span><span class="si">$(</span>homebrew/bin/brew shellenv<span class="si">)</span><span class="s2">"</span>
+brew update <span class="nt">--force</span> <span class="nt">--quiet</span>
+<span >chmod</span> <span class="nt">-R</span> go-w <span class="s2">"</span><span class="si">$(</span>brew <span class="nt">--prefix</span><span class="si">)</span><span class="s2">/share/zsh"</span>
+</code>
+					</div>
+				</div>
+			</article>
+			<article>
+				<p><strong>Multiple installations</strong></p>
+				<p>Create a Homebrew installation wherever you extract the tarball. Whichever <code>brew</code> command is
+					called
+					is where the packages will be
+					installed. You can use this as you see fit, e.g. to have a system set of libs in the default prefix and
+					tweaked
+					formulae for development in <code>~/homebrew</code>.</p>
+			</article>
+			<article>
+				<p><strong>Unattended installation</strong></p>
+				<p>If you want a non-interactive run of the Homebrew installer that doesn’t prompt for passwords (e.g. in
+					automation scripts), prepend <a
+						href="https://github.com/Homebrew/install/#install-homebrew-on-macos-or-linux"><code>NONINTERACTIVE=1</code></a>
+					to the installation command.</p>
+			</article>
 		</section>
 
-		<section class="main-section" id="Section_Five">
-			<header>Section Five</header>
-			<p><code>Lorem ipsum dolor</code> sit amet consectetur adipisicing elit. Corporis eos explicabo ipsa blanditiis illo sunt assumenda tenetur quod, fugiat obcaecati mollitia ut. Optio repellendus veritatis, possimus dicta minus repellat ad!</p>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia sint labore nobis, temporibus esse reiciendis blanditiis recusandae dolore eaque aperiam commodi nihil excepturi cupiditate nesciunt dignissimos quos voluptatum explicabo ipsam?</p>
+		<section id="uninstallation" class="main-section">
+			<header>Uninstallation</header>
+			<article>
+				<p>Uninstallation is documented in the <a href="https://docs.brew.sh/FAQ">FAQ</a>.</p>
+				<p><a name="1"><sup>1</sup></a> For 32-bit or PPC support see <a
+						href="https://github.com/mistydemeo/tigerbrew">Tigerbrew</a>.</p>
+				<p><a name="2"><sup>2</sup></a> 10.15 or higher is recommended, while 10.11–10.14 are supported on a best-effort
+					basis. For 10.4–10.6 see <a href="https://github.com/mistydemeo/tigerbrew">Tigerbrew</a>.</p>
+				<p><a name="3"><sup>3</sup></a> Most formulae require a compiler. A handful require a full Xcode installation.
+					You
+					can install Xcode, the CLT, or both; Homebrew supports all three configurations. Downloading Xcode may require
+					an Apple Developer account on older versions of Mac OS X. Sign up for free at <a
+						href="https://developer.apple.com/register/index.action">Apple’s website</a>.</p>
+				<p><a name="4"><sup>4</sup></a> The one-liner installation method found on <a href="https://brew.sh">brew.sh</a>
+					requires the Bourne-again shell, i.e. <code>bash</code>. Notably,
+					<code>zsh</code>, <code>fish</code>, <code>tcsh</code> and <code>csh</code> will not work.
+				</p>
+			</article>
 		</section>
 	</main>
-
 </body>
-<!-- <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script> -->
+
 </html>
